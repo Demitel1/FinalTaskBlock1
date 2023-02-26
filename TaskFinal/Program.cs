@@ -1,29 +1,41 @@
 ﻿Console.Clear();
 
-string[] array1 = new string[5] {"sun", "heart", "atom", "world", "rep"};
-string[] array2 = new string[array1.Length];
-
-void SearchArrayWord(string[] array1, string[] array2)
+int ArrayCheck(string[] array)
 {
-    int count = 0;
-    for (int i = 0; i < array1.Length; i++)
+ int count = 0;
+ for (int i = 0; i < array.Length; i++)
     {
-    if(array1[i].Length <= 3)
+ if (array[i].Length <= 3) count++;
+    }
+ return count;
+}
+
+string[] FillResultArray(string[] array, int count)
+{
+ string[] result = new string[count];
+ for (int i = 0; i < array.Length; i++)
+    {
+ if (array[i].Length <= 3)
         {
-        array2[count] = array1[i];
-        count++;
+ result[result.Length - count] = array[i];
+ count--;
         }
     }
+ return result;
 }
 
 void PrintArray(string[] array)
 {
-    for (int i = 0; i < array.Length; i++)
+    Console.Write("[");
+    for (int i = 0; i < array.Length - 1; i++) 
     {
-        Console.Write($"{array[i]} ");
+        Console.Write($"{array[i]}, ");
     }
-    Console.WriteLine();
+    Console.Write($"{array[array.Length - 1]}]");
 }
 
-SearchArrayWord(array1, array2);
-PrintArray(array2);
+
+string[] array = {"2", "world", ":-)", "1234", "computer","error", "php", "AORUS", "iOS"};
+int count = ArrayCheck(array);
+string[] resultArray = FillResultArray(array, count);
+PrintArray(resultArray);
